@@ -1,8 +1,8 @@
 function FindProxyForURL(url, host) {
-    // 尝试解析电脑的主机名，如果成功返回 IP（即电脑在线），则使用代理
-    if (dnsResolve("mypc") == "192.168.1.200") {
+    // 检查代理服务器是否可达
+    if (isHostReachable("192.168.1.200:7890")) {
         return "PROXY 192.168.1.200:7890";
     }
-    // 解析失败（电脑关机或主机名不解析），所有流量直连
+    // 如果代理不可达，则直接连接
     return "DIRECT";
 }
